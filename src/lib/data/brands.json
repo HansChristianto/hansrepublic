@@ -1,0 +1,69 @@
+{
+    "brands": [
+        {
+            "id": "bitkraft-studio",
+            "name": "Bitkraft Studio",
+            "tagline": "Premium WordPress Development",
+            "description": "Bitkraft Studio specializes in custom WordPress development, creating high-performance websites tailored to your unique business needs. From theme customization to full-scale WordPress applications, we bring your vision to life with clean code and modern design principles.",
+            "logo": "/images/brands/bitkraft-studio.svg",
+            "services": [
+                "web-development",
+                "e-commerce"
+            ],
+            "websiteUrl": "https://bitkraft.studio",
+            "order": 1
+        },
+        {
+            "id": "upbrandinc",
+            "name": "UpBrandInc",
+            "tagline": "Strategic Digital Marketing",
+            "description": "UpBrandInc delivers comprehensive digital marketing solutions that drive growth and brand awareness. Our expertise spans SEO, social media marketing, content strategy, and paid advertising campaigns that convert visitors into loyal customers.",
+            "logo": "/images/brands/upbrandinc.svg",
+            "services": [
+                "digital-marketing",
+                "affiliate-marketing"
+            ],
+            "websiteUrl": "https://upbrandinc.com",
+            "order": 2
+        },
+        {
+            "id": "modis-manja",
+            "name": "Modis Manja",
+            "tagline": "Creative Media Production",
+            "description": "Modis Manja is your creative partner for compelling visual storytelling. We produce engaging video content, podcasts, and multimedia campaigns that capture your brand's essence and connect with your target audience on a deeper level.",
+            "logo": "/images/brands/modis-manja.svg",
+            "services": [
+                "media",
+                "digital-marketing"
+            ],
+            "websiteUrl": "https://modismanja.com",
+            "order": 3
+        },
+        {
+            "id": "exodia-store",
+            "name": "Exodia Store",
+            "tagline": "Premium E-Commerce Solutions",
+            "description": "Exodia Store provides cutting-edge e-commerce solutions for businesses ready to dominate the online marketplace. We build scalable online stores with seamless checkout experiences, inventory management, and multi-channel selling capabilities.",
+            "logo": "/images/brands/exodia-store.svg",
+            "services": [
+                "e-commerce",
+                "web-development"
+            ],
+            "websiteUrl": "https://exodiastore.com",
+            "order": 4
+        },
+        {
+            "id": "wptribune",
+            "name": "WPTribune",
+            "tagline": "WordPress News & Resources",
+            "description": "WPTribune is your go-to resource for WordPress news, tutorials, and expert insights. We curate the latest trends, plugins, and best practices to help developers and businesses stay ahead in the WordPress ecosystem.",
+            "logo": "/images/brands/wptribune.svg",
+            "services": [
+                "web-development",
+                "media"
+            ],
+            "websiteUrl": "https://wptribune.com",
+            "order": 5
+        }
+    ]
+}

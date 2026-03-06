@@ -1,0 +1,99 @@
+properties:
+  - id: bitkraft-main
+    brandId: bitkraft-studio
+    name: Bitkraft Studio Website
+    url: https://bitkraft.studio
+    type: website
+    status: online
+    lastChecked: '2026-03-06T18:00:00Z'
+    responseTime: 150
+    isPublic: true
+  - id: bitkraft-blog
+    brandId: bitkraft-studio
+    name: Bitkraft Blog
+    url: https://blog.bitkraft.studio
+    type: website
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 312
+    isPublic: true
+  - id: upbrandinc-main
+    brandId: upbrandinc
+    name: UpBrandInc Website
+    url: https://upbrandinc.com
+    type: website
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 189
+    isPublic: true
+  - id: upbrandinc-api
+    brandId: upbrandinc
+    name: UpBrandInc API
+    url: https://api.upbrandinc.com
+    type: api
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 78
+    isPublic: false
+  - id: modis-manja-main
+    brandId: modis-manja
+    name: Modis Manja Website
+    url: https://modismanja.com
+    type: website
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 267
+    isPublic: true
+  - id: modis-manja-media
+    brandId: modis-manja
+    name: Modis Manja Media Portal
+    url: https://media.modismanja.com
+    type: webapp
+    status: unknown
+    lastChecked: '2026-03-06T15:30:00Z'
+    isPublic: true
+  - id: exodia-store-main
+    brandId: exodia-store
+    name: Exodia Store
+    url: https://exodiastore.com
+    type: website
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 421
+    isPublic: true
+  - id: exodia-store-admin
+    brandId: exodia-store
+    name: Exodia Admin Panel
+    url: https://admin.exodiastore.com
+    type: webapp
+    status: offline
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: null
+    isPublic: false
+  - id: exodia-store-api
+    brandId: exodia-store
+    name: Exodia Store API
+    url: https://api.exodiastore.com
+    type: api
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 156
+    isPublic: false
+  - id: wptribune-main
+    brandId: wptribune
+    name: WPTribune Website
+    url: https://wptribune.com
+    type: website
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 198
+    isPublic: true
+  - id: wptribune-feed
+    brandId: wptribune
+    name: WPTribune RSS Feed
+    url: https://wptribune.com/feed
+    type: api
+    status: online
+    lastChecked: '2026-03-06T16:00:00Z'
+    responseTime: 89
+    isPublic: true
