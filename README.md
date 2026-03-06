@@ -1,42 +1,86 @@
-# sv
+# Hans Republic Corporate Portfolio
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Corporate website for Hans Republic showcasing multiple digital brands with a monitoring dashboard.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Homepage** - Hero section with brand showcase
+- **Brands Listing** - Search and filter brands by service category
+- **Brand Detail Pages** - Individual brand pages with services and links
+- **Monitoring Dashboard** - Real-time status of all digital properties
+- **Webhook API** - UptimeRobot integration for automated status updates
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Tech Stack
 
-To recreate this project with the same configuration:
+- [SvelteKit 2.x](https://kit.svelte.dev/) with [Svelte 5](https://svelte.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/) with `@theme` directive
+- TypeScript
 
-```sh
-# recreate this project
-npx sv@0.12.5 create --template minimal --types ts --no-install sveltekit
-```
+## Getting Started
 
-## Developing
+```bash
+# Install dependencies
+npm install
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+# Start development server
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
+
+Open [http://localhost:3003](http://localhost:3003) in your browser.
+
+## Project Structure
+
+```
+src/
+├── app.css                    # Global styles with Tailwind v4 @theme
+├── lib/
+│   ├── components/           # UI components
+│   │   ├── ui/              # Button, Card, Badge, Section
+│   │   ├── layout/          # Header, Footer
+│   │   └── brands/          # BrandCard, BrandList
+│   ├── data/                 # JSON/YAML configuration
+│   │   ├── brands.json       # Brand data
+│   │   └── properties.yaml   # Monitoring properties
+│   └── types.ts              # TypeScript definitions
+└── routes/
+    ├── +page.svelte         # Homepage
+    ├── brands/               # Brand listing & detail
+    ├── monitoring/           # Monitoring dashboard
+    └── api/monitoring/      # Webhook endpoint
+```
+
+## Adding a Brand
+
+Edit `src/lib/data/brands.json`:
+
+```json
+{
+  "brands": [
+    {
+      "id": "new-brand",
+      "name": "New Brand",
+      "tagline": "What we do",
+      "description": "Full description...",
+      "image": "https://example.com/image.jpg",
+      "services": ["web-development"],
+      "websiteUrl": "https://newbrand.com",
+      "order": 6
+    }
+  ]
+}
+```
+
+## Monitoring Webhook Setup
+
+1. Deploy the app
+2. Configure UptimeRobot webhooks:
+   - URL: `https://your-domain.com/api/monitoring`
+   - Format: JSON
 
 ## Building
 
-To create a production version of your app:
-
-```sh
+```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+The output will be in the `build/` directory.
