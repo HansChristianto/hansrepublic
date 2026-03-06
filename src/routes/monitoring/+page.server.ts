@@ -2,9 +2,14 @@ import type { DigitalProperty, MonitoringSummary } from "$lib/types";
 import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
+import { fileURLToPath } from "url";
 import type { PageServerLoad } from "./$types";
 
-const getDataDir = () => path.join(process.cwd(), "src/lib/data");
+// Use import.meta.url for reliable path resolution in both dev and production
+const getDataDir = () => {
+  const baseDir = path.dirname(fileURLToPath(import.meta.url));
+  return path.resolve(baseDir, "../../../../src/lib/data");
+};
 
 const propertiesPath = path.join(getDataDir(), "properties.yaml");
 

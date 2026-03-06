@@ -2,20 +2,21 @@ import type { Brand, DigitalProperty } from "$lib/types";
 import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 import type { PageServerLoad } from "./$types";
 
-// Get the directory of the current module
+// Use import.meta.url for reliable path resolution in both dev and production
 const getDataDir = () => {
-  // In Vercel/production, we need to use a different approach
-  if (process.env.VERCEL) {
-    return path.join(process.cwd(), 'src/lib/data');
-  }
-  return path.join(process.cwd(), 'src/lib/data');
+  // In production (Vercel), files are in the .svelte-kit/output/server directory
+  // We need to go up to find the src/lib/data directory
+  const baseDir = path.dirname(fileURLToPath(import.meta.url));
+  // Go up from .svelte-kit/output/server/entries/pages/_page.server.ts.js
+  // to project root
+  return path.resolve(baseDir, "../../../../src/lib/data");
 };
 
-const brandsPath = path.join(getDataDir(), 'brands.json');
-const propertiesPath = path.join(getDataDir(), 'properties.yaml');
+const brandsPath = path.join(getDataDir(), "brands.json");
+const propertiesPath = path.join(getDataDir(), "properties.yaml");
 
 async function loadBrands(): Promise<Brand[]> {
   try {
@@ -24,7 +25,8 @@ async function loadBrands(): Promise<Brand[]> {
     const brands: Brand[] = json.brands || json;
     return brands.sort((a, b) => a.order - b.order);
   } catch (error) {
-    console.error('Error loading brands:', error);
+    console.error("Error loading brands:", error);
+    console.error("Brands path:", brandsPath);
     return [];
   }
 }
@@ -38,7 +40,8 @@ async function loadProperties(): Promise<DigitalProperty[]> {
     const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];
     return properties;
   } catch (error) {
-    console.error('Error loading properties:', error);
+    console.error("Error loading properties:", error);
+    console.error("Properties path:", propertiesPath);
     return [];
   }
 }
