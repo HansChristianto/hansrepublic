@@ -3,13 +3,20 @@ import fs from "fs";
 import path from "path";
 import type { PageServerLoad } from "./$types";
 
-const brandsPath = path.join(process.cwd(), "src/lib/data/brands.json");
+const getDataDir = () => path.join(process.cwd(), "src/lib/data");
+
+const brandsPath = path.join(getDataDir(), "brands.json");
 
 async function loadBrands(): Promise<Brand[]> {
-  const data = await fs.promises.readFile(brandsPath, "utf-8");
-  const json = JSON.parse(data);
-  const brands: Brand[] = json.brands || json;
-  return brands;
+  try {
+    const data = await fs.promises.readFile(brandsPath, "utf-8");
+    const json = JSON.parse(data);
+    const brands: Brand[] = json.brands || json;
+    return brands;
+  } catch (error) {
+    console.error("Error loading brands:", error);
+    return [];
+  }
 }
 
 export const load: PageServerLoad = async ({ params }) => {

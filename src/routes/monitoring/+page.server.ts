@@ -4,15 +4,22 @@ import yaml from "js-yaml";
 import path from "path";
 import type { PageServerLoad } from "./$types";
 
-const propertiesPath = path.join(process.cwd(), "src/lib/data/properties.yaml");
+const getDataDir = () => path.join(process.cwd(), "src/lib/data");
+
+const propertiesPath = path.join(getDataDir(), "properties.yaml");
 
 async function loadProperties(): Promise<DigitalProperty[]> {
-  const data = await fs.promises.readFile(propertiesPath, "utf-8");
-  const parsed = yaml.load(data) as
-    | { properties?: DigitalProperty[] }
-    | DigitalProperty[];
-  const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];
-  return properties;
+  try {
+    const data = await fs.promises.readFile(propertiesPath, "utf-8");
+    const parsed = yaml.load(data) as
+      | { properties?: DigitalProperty[] }
+      | DigitalProperty[];
+    const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];
+    return properties;
+  } catch (error) {
+    console.error("Error loading properties:", error);
+    return [];
+  }
 }
 
 export const load: PageServerLoad = async () => {

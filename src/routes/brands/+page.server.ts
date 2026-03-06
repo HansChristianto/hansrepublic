@@ -4,23 +4,35 @@ import yaml from "js-yaml";
 import path from "path";
 import type { PageServerLoad } from "./$types";
 
-const brandsPath = path.join(process.cwd(), "src/lib/data/brands.json");
-const propertiesPath = path.join(process.cwd(), "src/lib/data/properties.yaml");
+const getDataDir = () => path.join(process.cwd(), 'src/lib/data');
+
+const brandsPath = path.join(getDataDir(), 'brands.json');
+const propertiesPath = path.join(getDataDir(), 'properties.yaml');
 
 async function loadBrands(): Promise<Brand[]> {
-  const data = await fs.promises.readFile(brandsPath, "utf-8");
-  const json = JSON.parse(data);
-  const brands: Brand[] = json.brands || json;
-  return brands.sort((a, b) => a.order - b.order);
+  try {
+    const data = await fs.promises.readFile(brandsPath, "utf-8");
+    const json = JSON.parse(data);
+    const brands: Brand[] = json.brands || json;
+    return brands.sort((a, b) => a.order - b.order);
+  } catch (error) {
+    console.error('Error loading brands:', error);
+    return [];
+  }
 }
 
 async function loadProperties(): Promise<DigitalProperty[]> {
-  const data = await fs.promises.readFile(propertiesPath, "utf-8");
-  const parsed = yaml.load(data) as
-    | { properties?: DigitalProperty[] }
-    | DigitalProperty[];
-  const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];
-  return properties;
+  try {
+    const data = await fs.promises.readFile(propertiesPath, "utf-8");
+    const parsed = yaml.load(data) as
+      | { properties?: DigitalProperty[] }
+      | DigitalProperty[];
+    const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];
+    return properties;
+  } catch (error) {
+    console.error('Error loading properties:', error);
+    return [];
+  }
 }
 
 export const load: PageServerLoad = async () => {
