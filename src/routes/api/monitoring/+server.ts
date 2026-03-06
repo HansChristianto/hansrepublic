@@ -1,16 +1,6 @@
+import propertiesYaml from "$lib/data/properties.yaml?raw";
 import type { DigitalProperty } from "$lib/types";
-import fs from "fs";
 import yaml from "js-yaml";
-import path from "path";
-import { fileURLToPath } from 'url';
-
-// Use import.meta.url for reliable path resolution in both dev and production
-const getDataDir = () => {
-  const baseDir = path.dirname(fileURLToPath(import.meta.url));
-  return path.resolve(baseDir, '../../../../src/lib/data');
-};
-
-const propertiesPath = path.join(getDataDir(), "properties.yaml");
 
 /**
  * Webhook payload from UptimeRobot
@@ -49,8 +39,7 @@ function mapUptimeRobotStatus(
 
 async function loadProperties(): Promise<DigitalProperty[]> {
   try {
-    const data = await fs.promises.readFile(propertiesPath, "utf-8");
-    const parsed = yaml.load(data) as
+    const parsed = yaml.load(propertiesYaml) as
       | { properties?: DigitalProperty[] }
       | DigitalProperty[];
     const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];
@@ -61,18 +50,13 @@ async function loadProperties(): Promise<DigitalProperty[]> {
   }
 }
 
-async function saveProperties(properties: DigitalProperty[]): Promise<void> {
+async function saveProperties(_properties: DigitalProperty[]): Promise<void> {
   // Note: Vercel has a read-only filesystem in serverless functions
   // This function will fail in production but works locally
-  try {
-    const data = { properties };
-    const yamlStr = yaml.dump(data, { indent: 2, lineWidth: 120 });
-    await fs.promises.writeFile(propertiesPath, yamlStr, "utf-8");
-  } catch (error) {
-    console.error("Error saving properties (expected in Vercel):", error);
-    // In production, we'd need to use a database or external storage
-    throw new Error("File system is read-only in serverless environment");
-  }
+  // For production, use a database or external storage (e.g., Vercel KV, Supabase)
+  throw new Error(
+    "File system is read-only in serverless environment. Use external storage.",
+  );
 }
 
 /**

@@ -1,22 +1,11 @@
 import type { DigitalProperty, MonitoringSummary } from "$lib/types";
-import fs from "fs";
+import propertiesYaml from "$lib/data/properties.yaml?raw";
 import yaml from "js-yaml";
-import path from "path";
-import { fileURLToPath } from "url";
 import type { PageServerLoad } from "./$types";
-
-// Use import.meta.url for reliable path resolution in both dev and production
-const getDataDir = () => {
-  const baseDir = path.dirname(fileURLToPath(import.meta.url));
-  return path.resolve(baseDir, "../../../../src/lib/data");
-};
-
-const propertiesPath = path.join(getDataDir(), "properties.yaml");
 
 async function loadProperties(): Promise<DigitalProperty[]> {
   try {
-    const data = await fs.promises.readFile(propertiesPath, "utf-8");
-    const parsed = yaml.load(data) as
+    const parsed = yaml.load(propertiesYaml) as
       | { properties?: DigitalProperty[] }
       | DigitalProperty[];
     const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];

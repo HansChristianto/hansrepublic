@@ -1,25 +1,13 @@
 import type { Brand, DigitalProperty } from "$lib/types";
-import fs from "fs";
+import brandsData from "$lib/data/brands.json";
+import propertiesYaml from "$lib/data/properties.yaml?raw";
 import yaml from "js-yaml";
-import path from "path";
-import { fileURLToPath } from 'url';
 import type { PageServerLoad } from "./$types";
-
-// Use import.meta.url for reliable path resolution in both dev and production
-const getDataDir = () => {
-  const baseDir = path.dirname(fileURLToPath(import.meta.url));
-  return path.resolve(baseDir, '../../../../src/lib/data');
-};
-
-const brandsPath = path.join(getDataDir(), 'brands.json');
-const propertiesPath = path.join(getDataDir(), 'properties.yaml');
 
 async function loadBrands(): Promise<Brand[]> {
   try {
-    const data = await fs.promises.readFile(brandsPath, "utf-8");
-    const json = JSON.parse(data);
-    const brands: Brand[] = json.brands || json;
-    return brands.sort((a, b) => a.order - b.order);
+    const brands = brandsData.brands || brandsData;
+    return (brands as Brand[]).sort((a, b) => a.order - b.order);
   } catch (error) {
     console.error('Error loading brands:', error);
     return [];
@@ -28,8 +16,7 @@ async function loadBrands(): Promise<Brand[]> {
 
 async function loadProperties(): Promise<DigitalProperty[]> {
   try {
-    const data = await fs.promises.readFile(propertiesPath, "utf-8");
-    const parsed = yaml.load(data) as
+    const parsed = yaml.load(propertiesYaml) as
       | { properties?: DigitalProperty[] }
       | DigitalProperty[];
     const properties = Array.isArray(parsed) ? parsed : parsed.properties || [];
